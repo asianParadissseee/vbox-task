@@ -20,14 +20,14 @@ export const createStateStore = (state?: StateSchema) => {
         reducer: rootReducer,
         preloadedState: state,
         devTools: true,
-        middleware: (getDefaultMiddleware:GetDefaultMiddleware<StateSchema>) => (
+        middleware: (getDefaultMiddleware: GetDefaultMiddleware<StateSchema>) => (
             getDefaultMiddleware({
                 thunk: {
                     extraArgument: extraArg
                 }
-            })
+            }).concat(rtkApi.middleware)
         )
     })
 }
 setupListeners(createStateStore().dispatch);
-export type TypeDispatch = ReturnType<typeof  createStateStore>["dispatch"]
+export type TypeDispatch = ReturnType<typeof createStateStore>["dispatch"]
