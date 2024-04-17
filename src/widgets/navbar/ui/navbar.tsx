@@ -1,9 +1,10 @@
+import {Layout} from "antd";
 
 const Navbar = () => {
     return (
-        <div>
+        <Layout.Header>
 
-        </div>
+        </Layout.Header>
     );
 };
 
