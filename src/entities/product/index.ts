@@ -1,12 +1,23 @@
 import Product from "./ui/product"
-import {useGetProductById, useGetProducts} from "./models/api/product.api"
-import {ProductSchema} from "./models/schema/product.schema"
+import {ProductSchema, ProductType} from "./models/schema/product.schema"
+import {productReducer, productAction} from "./models/slices/product.slice"
+import {
+    getProductIsLoading,
+    getProductSelector,
+    getProductIsError,
+    getProductError
+} from "./models/selector/product.selector"
 
 export {
     Product,
-    useGetProductById,
-    useGetProducts,
+    productReducer,
+    productAction,
+    getProductIsLoading,
+    getProductIsError,
+    getProductSelector,
+    getProductError
 }
 export type {
-    ProductSchema
+    ProductSchema,
+    ProductType
 }

@@ -1,10 +1,10 @@
 import {StateSchema, ThunkExtraArg} from "../config/state-schema";
 import {$api} from "@/shared/api/http";
 import {configureStore, ReducersMapObject} from "@reduxjs/toolkit";
-import {rtkApi} from "@/shared/api/rtk-api";
 // @ts-ignore
 import {GetDefaultMiddleware} from "@reduxjs/toolkit/dist/getDefaultMiddleware";
 import {setupListeners} from "@reduxjs/toolkit/query";
+import {productReducer} from "@/entities/product";
 
 export const createStateStore = (state?: StateSchema) => {
 
@@ -13,7 +13,7 @@ export const createStateStore = (state?: StateSchema) => {
     }
 
     const rootReducer: ReducersMapObject<StateSchema> = {
-        [rtkApi.reducerPath]: rtkApi.reducer
+        product: productReducer
     }
 
     return configureStore({
@@ -25,7 +25,7 @@ export const createStateStore = (state?: StateSchema) => {
                 thunk: {
                     extraArgument: extraArg
                 }
-            }).concat(rtkApi.middleware)
+            })
         )
     })
 }

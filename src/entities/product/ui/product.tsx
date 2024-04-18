@@ -1,10 +1,9 @@
-import {ProductSchema, useGetProducts} from "@/entities/product";
+import {ProductType} from "@/entities/product";
 import {FC} from "react";
-import {AppLoader} from "@/shared/ui/loader";
 import {Button} from "antd";
 
 interface ProductProps {
-    product?: ProductSchema
+    product?: ProductType
 }
 
 const Product: FC<ProductProps> = ({product}) => {
