@@ -16,7 +16,6 @@ const ProductsList = memo(() => {
         dispatch(productService([]))
     }, [dispatch])
 
-    console.log(products)
     if (isLoading) {
         return (
             <AppLoader/>

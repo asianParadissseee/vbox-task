@@ -7,7 +7,7 @@ const AppLogo = () => {
     const navigate = useNavigate()
 
     return (
-        <div onClick={()=>navigate(getRouteHome())} className="text-white font-black">
+        <div onClick={()=>navigate(getRouteHome())} className="text-white cursor-pointer font-black">
             VBox
         </div>
     );

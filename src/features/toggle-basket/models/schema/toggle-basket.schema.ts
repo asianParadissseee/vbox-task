@@ -7,5 +7,4 @@ export interface ProductBasketItem extends ProductType{
 
 export interface ToggleBasketSchema {
     items: ProductBasketItem[],
-    counter: number
 }

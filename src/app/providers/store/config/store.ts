@@ -18,7 +18,6 @@ const persistConfig = {
 const productPersistReducer = persistReducer(persistConfig, productReducer)
 const toggleBasketPersistReducer = persistReducer(persistConfig, toggleBasketReducer)
 
-
 export const createStateStore = (state?: StateSchema) => {
 
     const extraArg: ThunkExtraArg = {
@@ -27,9 +26,8 @@ export const createStateStore = (state?: StateSchema) => {
 
     const rootReducer: ReducersMapObject<StateSchemaPersistPartial> = {
         product: productPersistReducer,
-        toggleBasket: toggleBasketPersistReducer
+        toggleBasket: toggleBasketPersistReducer,
     }
-
     return configureStore({
         reducer: rootReducer,
         preloadedState: state,

@@ -1,28 +1,24 @@
-import {FC, memo, useCallback} from "react";
+import React, {FC, useCallback} from 'react';
 import {Button} from "antd";
-import {incrementProductAction} from "../models/slice/increment-product.slice"
-import {ProductType} from "@/entities/product";
+import {productAction, ProductType} from "@/entities/product";
 import {useTypeDispatch} from "@/shared/hooks/use-dispatch";
 
 interface IncrementButtonProps {
     product: ProductType
 }
 
-const IncrementButton: FC<IncrementButtonProps> = memo(({product}) => {
+const IncrementButton: FC<IncrementButtonProps> = ({product}) => {
 
     const dispatch = useTypeDispatch()
-
-    const handleIncrementProduct = useCallback((productId: number) => {
-        dispatch(incrementProductAction.increment({id: productId }))
-    }, [dispatch])
+    const handleIncrementProduct = useCallback(()=>{
+        dispatch(productAction.increment({id: product.id}))
+    },[dispatch])
 
     return (
-        <div>
-            <Button type={"primary"} onClick={()=>handleIncrementProduct(product.id)}>
-                +
-            </Button>
-        </div>
+        <Button type={"primary"} onClick={handleIncrementProduct}>
+            +
+        </Button>
     );
-});
+};
 
 export default IncrementButton;

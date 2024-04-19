@@ -3,7 +3,6 @@ import {ProductBasketItem, ToggleBasketSchema} from "../schema/toggle-basket.sch
 import {ProductType} from "@/entities/product";
 
 const initialState: ToggleBasketSchema = {
-    counter: 0,
     items: []
 }
 
@@ -22,7 +21,6 @@ const toggleBasketSlice = createSlice({
         removeFromCart(state, action: PayloadAction<ProductType>) {
             const index = state.items.findIndex(item => item.id === action.payload.id);
             if (index >= 0) {
-                state.counter -= parseInt(state.items[index].price) * state.items[index].quantity;
                 state.items.splice(index, 1);
             }
         },

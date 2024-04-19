@@ -11,7 +11,24 @@ const initialState: ProductSchema = {
 const productSlice = createSlice({
     name: "product/slice",
     initialState,
-    reducers: {},
+    reducers: {
+        increment(state, action: PayloadAction<{ id: number }>) {
+            state.products = state.products.map(product => {
+                if (product.id === action.payload.id) {
+                    return {...product, counter: (product.counter || 0) + 1};
+                }
+                return product;
+            });
+        },
+        decrement(state, action: PayloadAction<{ id: number }>) {
+            state.products = state.products.map(product => {
+                if (product.id === action.payload.id && product.counter && product.counter > 0) {
+                    return {...product, counter: product.counter - 1};
+                }
+                return product;
+            });
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(productService.pending, (state) => {
             state.isLoading = true

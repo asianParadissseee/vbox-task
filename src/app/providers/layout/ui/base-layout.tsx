@@ -1,6 +1,5 @@
 import {FC, ReactNode} from "react";
 import {Navbar} from "@/widgets/navbar";
-import {Footer} from "@/widgets/footer";
 import {Content} from "antd/es/layout/layout";
 
 interface BaseLayoutProps {
@@ -14,7 +13,6 @@ const BaseLayout: FC<BaseLayoutProps> = ({children}) => {
             <Content className="container mx-auto px-10 py-20">
                 {children}
             </Content>
-            <Footer/>
         </div>
     );
 };
