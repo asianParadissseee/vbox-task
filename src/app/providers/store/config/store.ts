@@ -5,6 +5,7 @@ import {configureStore, ReducersMapObject} from "@reduxjs/toolkit";
 import {GetDefaultMiddleware} from "@reduxjs/toolkit/dist/getDefaultMiddleware";
 import {setupListeners} from "@reduxjs/toolkit/query";
 import {productReducer} from "@/entities/product";
+import {toggleBasketReducer} from "@/features/toggle-basket";
 
 export const createStateStore = (state?: StateSchema) => {
 
@@ -13,7 +14,8 @@ export const createStateStore = (state?: StateSchema) => {
     }
 
     const rootReducer: ReducersMapObject<StateSchema> = {
-        product: productReducer
+        product: productReducer,
+        toggleBasket: toggleBasketReducer
     }
 
     return configureStore({

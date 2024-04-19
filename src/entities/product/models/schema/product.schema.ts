@@ -2,7 +2,7 @@ export interface ProductType {
     id: number;
     name: string;
     description: string;
-    price: number
+    price: string
 }
 
 export interface ProductSchema  {

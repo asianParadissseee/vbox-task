@@ -24,7 +24,7 @@ const ProductsList = memo(() => {
     }
     if (isError) {
         return (
-            <p>
+            <p className="text-red-500 text-2xl text-center">
                 {errorMessage}
             </p>
         )

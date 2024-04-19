@@ -1,6 +1,11 @@
-import {ProductSchema} from "@/entities/product";
+import { ProductType} from "@/entities/product";
+
+
+export interface ProductBasketItem extends ProductType{
+    quantity: number
+}
 
 export interface ToggleBasketSchema {
-    items: ProductSchema[],
+    items: ProductBasketItem[],
     counter: number
 }
