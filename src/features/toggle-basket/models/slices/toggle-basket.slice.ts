@@ -26,6 +26,9 @@ const toggleBasketSlice = createSlice({
                 state.items.splice(index, 1);
             }
         },
+        clearBasket(state) {
+            state.items = []
+        }
     }
 })
 

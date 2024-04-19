@@ -1,11 +1,23 @@
-import {StateSchema, ThunkExtraArg} from "../config/state-schema";
+import {StateSchema, StateSchemaPersistPartial, ThunkExtraArg} from "../config/state-schema";
 import {$api} from "@/shared/api/http";
 import {configureStore, ReducersMapObject} from "@reduxjs/toolkit";
-// @ts-ignore
-import {GetDefaultMiddleware} from "@reduxjs/toolkit/dist/getDefaultMiddleware";
 import {setupListeners} from "@reduxjs/toolkit/query";
 import {productReducer} from "@/entities/product";
 import {toggleBasketReducer} from "@/features/toggle-basket";
+import {FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, persistStore, persistReducer} from "redux-persist"
+import storage from "redux-persist/lib/storage"
+// @ts-ignore
+import {GetDefaultMiddleware} from "@reduxjs/toolkit/dist/getDefaultMiddleware";
+
+
+const persistConfig = {
+    key: "root",
+    storage: storage
+}
+
+const productPersistReducer = persistReducer(persistConfig, productReducer)
+const toggleBasketPersistReducer = persistReducer(persistConfig, toggleBasketReducer)
+
 
 export const createStateStore = (state?: StateSchema) => {
 
@@ -13,9 +25,9 @@ export const createStateStore = (state?: StateSchema) => {
         api: $api
     }
 
-    const rootReducer: ReducersMapObject<StateSchema> = {
-        product: productReducer,
-        toggleBasket: toggleBasketReducer
+    const rootReducer: ReducersMapObject<StateSchemaPersistPartial> = {
+        product: productPersistReducer,
+        toggleBasket: toggleBasketPersistReducer
     }
 
     return configureStore({
@@ -26,10 +38,14 @@ export const createStateStore = (state?: StateSchema) => {
             getDefaultMiddleware({
                 thunk: {
                     extraArgument: extraArg
-                }
+                },
+                serializableCheck: {
+                    ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+                },
             })
         )
     })
 }
 setupListeners(createStateStore().dispatch);
 export type TypeDispatch = ReturnType<typeof createStateStore>["dispatch"]
+export const persistor = persistStore(createStateStore())
